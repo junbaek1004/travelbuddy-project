@@ -1,27 +1,30 @@
-# Java
+# Java / Maven
 target/
-*.log
 *.class
+*.log
+*.jar
 
-# Angular
+# Node / Angular
 node_modules/
 dist/
-.env
-
-# IDEs
-.idea/
-*.iml
-.classpath
-.project
-.settings/
+.angular/
 
 # Docker
-mysql-data/
-docker-data/
+*.env
+.env
 
-# System
+# OS / IDE junk
 .DS_Store
 Thumbs.db
 
-# Eclipse workspace (don't track this)
+# Eclipse / IntelliJ
 .metadata/
+.project
+.classpath
+.settings/
+.idea/
+*.iml
+
+# Logs
+logs/
+*.log
