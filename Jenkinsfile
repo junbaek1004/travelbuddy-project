@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_COMPOSE_PATH = "docker-compose.yml"  // <- just this
+        DOCKER_COMPOSE_PATH = "docker-compose.yml"
     }
 
     stages {
