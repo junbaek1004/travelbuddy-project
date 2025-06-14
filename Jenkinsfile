@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_COMPOSE_PATH = "./travelbuddy-microservices/docker-compose.yml"
+        DOCKER_COMPOSE_PATH = "docker-compose.yml"  // <- just this
     }
 
     stages {
@@ -15,15 +15,19 @@ pipeline {
 
         stage('Build Images') {
             steps {
-                echo '🐳 Building Docker images...'
-                sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build"
+                dir('travelbuddy-microservices') {
+                    echo '🐳 Building Docker images...'
+                    sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build"
+                }
             }
         }
 
         stage('Start Containers') {
             steps {
-                echo '🚀 Starting containers...'
-                sh "docker-compose -f ${DOCKER_COMPOSE_PATH} up -d"
+                dir('travelbuddy-microservices') {
+                    echo '🚀 Starting containers...'
+                    sh "docker-compose -f ${DOCKER_COMPOSE_PATH} up -d"
+                }
             }
         }
     }
