@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         DOCKER_COMPOSE_PATH = "docker-compose.yml"
+        COMPOSE_HTTP_TIMEOUT = '300'
     }
 
     stages {
@@ -13,16 +14,52 @@ pipeline {
             }
         }
 
-        stage('Build Images') {
+        stage('Build user-service') {
             steps {
                 dir('travelbuddy-microservices') {
-                    echo '🐳 Building Docker images...'
-                    sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build"
+                    echo '🔧 Building user-service...'
+                    sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build user-service"
                 }
             }
         }
 
-        stage('Start Containers') {
+        stage('Build booking-service') {
+            steps {
+                dir('travelbuddy-microservices') {
+                    echo '🔧 Building booking-service...'
+                    sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build booking-service"
+                }
+            }
+        }
+
+        stage('Build discovery-server') {
+            steps {
+                dir('travelbuddy-microservices') {
+                    echo '🔧 Building discovery-server...'
+                    sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build discovery-server"
+                }
+            }
+        }
+
+        stage('Build fare-service') {
+            steps {
+                dir('travelbuddy-microservices') {
+                    echo '🔧 Building fare-service...'
+                    sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build fare-service"
+                }
+            }
+        }
+
+        stage('Build frontend') {
+            steps {
+                dir('travelbuddy-microservices') {
+                    echo '🎨 Building frontend...'
+                    sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build frontend"
+                }
+            }
+        }
+
+        stage('Start All Containers') {
             steps {
                 dir('travelbuddy-microservices') {
                     echo '🚀 Starting containers...'
