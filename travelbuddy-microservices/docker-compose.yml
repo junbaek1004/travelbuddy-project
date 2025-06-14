@@ -10,7 +10,7 @@ services:
       MYSQL_ROOT_PASSWORD: root@123
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./travelbuddy-microservices/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - travelbuddy-network
     healthcheck:
@@ -22,8 +22,7 @@ services:
   discovery-server:
     image: discovery-server
     build:
-      context: ./discovery-server
-      dockerfile: Dockerfile
+      context: ./travelbuddy-microservices/discovery-server
     ports:
       - "8761:8761"
     networks:
@@ -32,8 +31,7 @@ services:
   user-service:
     image: user-service
     build:
-      context: ./user-service
-      dockerfile: Dockerfile
+      context: ./travelbuddy-microservices/user-service
     ports:
       - "8081:8081"
     depends_on:
@@ -49,8 +47,7 @@ services:
   booking-service:
     image: booking-service
     build:
-      context: ./bookingservice
-      dockerfile: Dockerfile
+      context: ./travelbuddy-microservices/bookingservice
     ports:
       - "8082:8082"
     depends_on:
@@ -68,8 +65,7 @@ services:
   fare-service:
     image: fare-service
     build:
-      context: ./fare-service
-      dockerfile: Dockerfile
+      context: ./travelbuddy-microservices/fare-service
     ports:
       - "8083:8083"
     depends_on:
@@ -85,8 +81,7 @@ services:
   frontend:
     image: travelbuddy-frontend
     build:
-      context: ../travelbuddy-frontend
-      dockerfile: Dockerfile
+      context: ./travelbuddy-frontend
     ports:
       - "4200:80"
     depends_on:
