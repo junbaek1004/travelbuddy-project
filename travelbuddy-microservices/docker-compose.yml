@@ -10,11 +10,11 @@ services:
       MYSQL_ROOT_PASSWORD: root@123
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./travelbuddy-microservices/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - travelbuddy-network
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -22,7 +22,7 @@ services:
   discovery-server:
     image: discovery-server
     build:
-      context: ./discovery-server
+      context: ./travelbuddy-microservices/discovery-server
     ports:
       - "8761:8761"
     networks:
@@ -31,7 +31,7 @@ services:
   user-service:
     image: user-service
     build:
-      context: ./user-service
+      context: ./travelbuddy-microservices/user-service
     ports:
       - "8081:8081"
     depends_on:
@@ -47,7 +47,7 @@ services:
   booking-service:
     image: booking-service
     build:
-      context: ./bookingservice
+      context: ./travelbuddy-microservices/bookingservice
     ports:
       - "8082:8082"
     depends_on:
@@ -65,7 +65,7 @@ services:
   fare-service:
     image: fare-service
     build:
-      context: ./fare-service
+      context: ./travelbuddy-microservices/fare-service
     ports:
       - "8083:8083"
     depends_on:
@@ -77,10 +77,11 @@ services:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka
     networks:
       - travelbuddy-network
+
   frontend:
     image: travelbuddy-frontend
     build:
-      context: ../travelbuddy-frontend
+      context: ./travelbuddy-frontend
     ports:
       - "4200:80"
     depends_on:
