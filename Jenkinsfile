@@ -14,47 +14,32 @@ pipeline {
             }
         }
 
-        stage('Build user-service') {
+        stage('Build JARs with Maven') {
             steps {
-                dir('travelbuddy-microservices') {
-                    echo '🔧 Building user-service...'
-                    sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build user-service"
+                dir('travelbuddy-microservices/user-service') {
+                    echo '🔨 Building user-service JAR...'
+                    sh 'mvn clean install'
+                }
+                dir('travelbuddy-microservices/booking-service') {
+                    echo '🔨 Building booking-service JAR...'
+                    sh 'mvn clean install'
+                }
+                dir('travelbuddy-microservices/fare-service') {
+                    echo '🔨 Building fare-service JAR...'
+                    sh 'mvn clean install'
+                }
+                dir('travelbuddy-microservices/discovery-server') {
+                    echo '🔨 Building discovery-server JAR...'
+                    sh 'mvn clean install'
                 }
             }
         }
 
-        stage('Build booking-service') {
+        stage('Build Docker Images') {
             steps {
                 dir('travelbuddy-microservices') {
-                    echo '🔧 Building booking-service...'
-                    sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build booking-service"
-                }
-            }
-        }
-
-        stage('Build discovery-server') {
-            steps {
-                dir('travelbuddy-microservices') {
-                    echo '🔧 Building discovery-server...'
-                    sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build discovery-server"
-                }
-            }
-        }
-
-        stage('Build fare-service') {
-            steps {
-                dir('travelbuddy-microservices') {
-                    echo '🔧 Building fare-service...'
-                    sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build fare-service"
-                }
-            }
-        }
-
-        stage('Build frontend') {
-            steps {
-                dir('travelbuddy-microservices') {
-                    echo '🎨 Building frontend...'
-                    sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build frontend"
+                    echo '🐳 Building Docker images...'
+                    sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build"
                 }
             }
         }
