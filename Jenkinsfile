@@ -37,7 +37,7 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
-                dir('travelbuddy-microservices') {
+                dir('.') {
                     echo '🐳 Building Docker images...'
                     sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build"
                 }
@@ -46,7 +46,7 @@ pipeline {
 
         stage('Start All Containers') {
             steps {
-                dir('travelbuddy-microservices') {
+                dir('.') {
                     echo '🚀 Starting containers...'
                     sh "docker-compose -f ${DOCKER_COMPOSE_PATH} up -d"
                 }
@@ -58,8 +58,3 @@ pipeline {
         success {
             echo '✅ Deployment successful!'
         }
-        failure {
-            echo '❌ Deployment failed.'
-        }
-    }
-}
