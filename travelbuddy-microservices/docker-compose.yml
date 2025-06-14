@@ -14,7 +14,7 @@ services:
     networks:
       - travelbuddy-network
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -23,6 +23,7 @@ services:
     image: discovery-server
     build:
       context: ./discovery-server
+      dockerfile: Dockerfile
     ports:
       - "8761:8761"
     networks:
@@ -32,6 +33,7 @@ services:
     image: user-service
     build:
       context: ./user-service
+      dockerfile: Dockerfile
     ports:
       - "8081:8081"
     depends_on:
@@ -48,6 +50,7 @@ services:
     image: booking-service
     build:
       context: ./bookingservice
+      dockerfile: Dockerfile
     ports:
       - "8082:8082"
     depends_on:
@@ -66,6 +69,7 @@ services:
     image: fare-service
     build:
       context: ./fare-service
+      dockerfile: Dockerfile
     ports:
       - "8083:8083"
     depends_on:
@@ -82,6 +86,7 @@ services:
     image: travelbuddy-frontend
     build:
       context: ../travelbuddy-frontend
+      dockerfile: Dockerfile
     ports:
       - "4200:80"
     depends_on:
