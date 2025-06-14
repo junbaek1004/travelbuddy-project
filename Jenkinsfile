@@ -20,7 +20,7 @@ pipeline {
                     echo '🔨 Building user-service JAR...'
                     sh 'mvn clean install -DskipTests'
                 }
-                dir('travelbuddy-microservices/booking-service') {
+                dir('travelbuddy-microservices/bookingservice') {
                     echo '🔨 Building booking-service JAR...'
                     sh 'mvn clean install -DskipTests'
                 }
