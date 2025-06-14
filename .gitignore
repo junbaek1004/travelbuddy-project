@@ -1,0 +1,27 @@
+# Java
+target/
+*.log
+*.class
+
+# Angular
+node_modules/
+dist/
+.env
+
+# IDEs
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# Docker
+mysql-data/
+docker-data/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Eclipse workspace (don't track this)
+.metadata/

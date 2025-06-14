@@ -1,0 +1,25 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: user-service
+
+  datasource:
+    url: jdbc:mysql://mysql:3306/travelbuddy_user_service
+    username: root
+    password: root@123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka
+
+jwt:
+  secret: mysupersecurekeythatisexactly32bytes!!

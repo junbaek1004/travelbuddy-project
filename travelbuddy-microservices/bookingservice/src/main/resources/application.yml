@@ -1,0 +1,27 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: booking-service
+
+  datasource:
+    url: jdbc:mysql://mysql:3306/travelbuddy_booking_service
+    username: root
+    password: root@123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka
+
+jwt:
+  secret: mysupersecurekeythatisexactly32bytes!!
+  
