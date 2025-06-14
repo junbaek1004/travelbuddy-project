@@ -16,14 +16,14 @@ pipeline {
         stage('Build Images') {
             steps {
                 echo '🐳 Building Docker images...'
-                sh "docker compose -f ${DOCKER_COMPOSE_PATH} build"
+                sh "docker-compose -f ${DOCKER_COMPOSE_PATH} build"
             }
         }
 
         stage('Start Containers') {
             steps {
                 echo '🚀 Starting containers...'
-                sh "docker compose -f ${DOCKER_COMPOSE_PATH} up -d"
+                sh "docker-compose -f ${DOCKER_COMPOSE_PATH} up -d"
             }
         }
     }
