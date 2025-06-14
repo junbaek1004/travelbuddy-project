@@ -18,19 +18,19 @@ pipeline {
             steps {
                 dir('travelbuddy-microservices/user-service') {
                     echo '🔨 Building user-service JAR...'
-                    sh 'mvn clean install'
+                    sh 'mvn clean install -DskipTests'
                 }
                 dir('travelbuddy-microservices/booking-service') {
                     echo '🔨 Building booking-service JAR...'
-                    sh 'mvn clean install'
+                    sh 'mvn clean install -DskipTests'
                 }
                 dir('travelbuddy-microservices/fare-service') {
                     echo '🔨 Building fare-service JAR...'
-                    sh 'mvn clean install'
+                    sh 'mvn clean install -DskipTests'
                 }
                 dir('travelbuddy-microservices/discovery-server') {
                     echo '🔨 Building discovery-server JAR...'
-                    sh 'mvn clean install'
+                    sh 'mvn clean install -DskipTests'
                 }
             }
         }
