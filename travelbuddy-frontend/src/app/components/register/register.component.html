@@ -1,0 +1,27 @@
+
+<div class="container">
+    <h2>Register</h2>
+    <form (ngSubmit)="registerUser()">
+      <div>
+        <label>Email:</label>
+        <input type="email" [(ngModel)]="user.email" name="email" required />
+      </div>
+  
+      <div>
+        <label>Password:</label>
+        <input type="password" [(ngModel)]="user.password" name="password" required />
+      </div>
+  
+      <div>
+        <label>Role:</label>
+        <select [(ngModel)]="user.role" name="role">
+          <option value="USER">User</option>
+          <option value="ADMIN">Admin</option>
+        </select>
+      </div>
+  
+      <button type="submit">Register</button>
+  
+      <p *ngIf="errorMessage" style="color:red">{{ errorMessage }}</p>
+    </form>
+  </div>
