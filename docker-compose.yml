@@ -85,4 +85,15 @@ services:
     ports:
       - "4200:80"
     depends_on:
-      - user-serv
+      - user-service
+      - booking-service
+      - fare-service
+    networks:
+      - travelbuddy-network
+
+networks:
+  travelbuddy-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
